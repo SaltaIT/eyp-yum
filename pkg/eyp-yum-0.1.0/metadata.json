@@ -1,6 +1,6 @@
 {
   "name": "eyp-yum",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "author": "eyp",
   "summary": "basic yum settings",
   "license": "Apache-2.0",
