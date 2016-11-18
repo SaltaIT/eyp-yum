@@ -4,8 +4,8 @@
 
 [main]
 cachedir=/var/cache/yum/$basearch/$releasever
-keepcache=0
-debuglevel=2
+keepcache=<%= scope.function_bool2number([@keepcache]) %>
+debuglevel=<%= @debuglevel %>
 logfile=/var/log/yum.log
 exactarch=1
 obsoletes=1

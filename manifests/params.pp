@@ -14,26 +14,32 @@ class yum::params {
       {
         'CentOS':
         {
+          $installonly_limit=5
+          $distroverpkg='centos-release'
           case $::operatingsystemrelease
           {
             /^6.*/:
             {
-              $installonly_limit=5
+
               $bugtracker_url='http://bugs.centos.org/set_project.php?project_id=16&ref=http://bugs.centos.org/bug_report_page.php?category=yum'
-              $distroverpkg='centos-release'
+            }
+            /^7.*/:
+            {
+
+              $bugtracker_url='http://bugs.centos.org/set_project.php?project_id=23&ref=http://bugs.centos.org/bug_report_page.php?category=yum'
             }
             default: { fail('Unsupported') }
           }
         }
         'RedHat':
         {
+          $installonly_limit=3
+          $bugtracker_url=undef
+          $distroverpkg=undef
           case $::operatingsystemrelease
           {
-            /^6.*/:
+            /^[67].*/:
             {
-              $installonly_limit=3
-              $bugtracker_url=undef
-              $distroverpkg=undef
             }
             default: { fail('Unsupported') }
           }

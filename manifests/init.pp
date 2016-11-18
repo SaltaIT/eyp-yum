@@ -1,6 +1,10 @@
 # == Class: yum
 #
-class yum($http_proxy=undef) inherits yum::params {
+class yum(
+            $http_proxy = undef,
+            $keepcache = false,
+            $debuglevel = '2',
+          ) inherits yum::params {
 
   file { '/etc/yum.conf':
     ensure => 'present',
