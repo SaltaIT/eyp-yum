@@ -2,7 +2,7 @@
   "name": "eyp-yum",
   "version": "0.1.2",
   "author": "eyp",
-  "summary": "basic yum management",
+  "summary": "yum general config management",
   "license": "Apache-2.0",
   "source": "https://github.com/NTTCom-MS/eyp-yum",
   "project_page": null,
