@@ -2,7 +2,7 @@
 #
 class yum(
             $http_proxy = undef,
-            $keepcache = false,
+            $keepcache  = false,
             $debuglevel = '2',
           ) inherits yum::params {
 
