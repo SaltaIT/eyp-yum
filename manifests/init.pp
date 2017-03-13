@@ -1,9 +1,10 @@
 # == Class: yum
 #
 class yum(
-            $http_proxy = undef,
-            $keepcache  = false,
-            $debuglevel = '2',
+            $http_proxy     = undef,
+            $keepcache      = false,
+            $debuglevel     = '2',
+            $manage_package = true,
           ) inherits yum::params {
 
   file { '/etc/yum.conf':
@@ -14,5 +15,10 @@ class yum(
     content => template("${module_name}/yumconf.erb")
   }
 
-
+  if($manage_package)
+  {
+    package { 'yum-utils':
+      ensure => 'installed',
+    }
+  }
 }
