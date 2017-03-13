@@ -53,8 +53,13 @@ for upgrading, you may wish to include an additional section here: Upgrading
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+[reposync](https://access.redhat.com/solutions/23016)
+```puppet
+yum::reposync { 'rhel-6-server-rpms':
+  repo_path    => '/var/www/rhel-6-server-rpms',
+  cron_enabled => false,
+}
+```
 
 ## Reference
 
