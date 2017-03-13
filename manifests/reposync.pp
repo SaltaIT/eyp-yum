@@ -18,8 +18,8 @@ define yum::reposync(
   case $::operatingsystem
   {
     # proves amb centos
-    # 'RedHat':
-    'CentOS':
+    # 'CentOS':
+    'RedHat':
     {
       package { 'createrepo':
         ensure  => 'installed',
