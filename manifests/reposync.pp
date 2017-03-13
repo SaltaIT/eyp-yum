@@ -18,7 +18,11 @@ define yum::reposync(
   case $::operatingsystem
   {
     # proves amb centos
-    # 'CentOS':
+    'CentOS':
+    {
+      # https://wiki.centos.org/HowTos/CreateLocalMirror
+      fail('TODO: rsync')
+    }
     'RedHat':
     {
       package { 'createrepo':
