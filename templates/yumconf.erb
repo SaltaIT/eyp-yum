@@ -20,7 +20,9 @@ distroverpkg=<%= @distroverpkg %>
 <% end -%>
 
 <% if defined?(@http_proxy) -%>
+<% if ! @http_proxy.empty? -%>
 proxy=<%= @http_proxy %>
+<% end -%>
 <% end -%>
 
 #  This is the default, if you make this bigger yum won't see if the metadata
