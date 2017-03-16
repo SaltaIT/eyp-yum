@@ -41,6 +41,21 @@ define yum::reposync(
         weekday  => $weekday,
         require  => Package['createrepo'],
       }
+
+      exec { 'mkdir p eyp yum reposyn repo_path':
+        command => "mkdir -p ${repo_path}",
+        creates => $repo_path,
+        before  => Cron["cronjob tarball backup ${tarbackup::backupscript}"],
+      }
+
+      file { $repo_path:
+        ensure  => 'directory',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        require => Exec['mkdir p eyp yum reposyn repo_path'],
+        before  => Cron["cronjob tarball backup ${tarbackup::backupscript}"],
+      }
     }
     default:
     {
