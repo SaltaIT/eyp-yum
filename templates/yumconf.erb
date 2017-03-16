@@ -20,7 +20,7 @@ distroverpkg=<%= @distroverpkg %>
 <% end -%>
 
 <% if defined?(@http_proxy) -%>
-<% if ! @http_proxy.empty? -%>
+<% if ! @http_proxy.to_s.empty? -%>
 proxy=<%= @http_proxy %>
 <% end -%>
 <% end -%>
