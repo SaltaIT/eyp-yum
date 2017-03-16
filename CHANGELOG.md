@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.7
+
+* check if proxy is empty
+
 ## 0.1.6
 
 * bugfix reposync cronjob name
