@@ -42,7 +42,7 @@ define yum::reposync(
         require  => Package['createrepo'],
       }
 
-      exec { :
+      exec { "mkdir p eyp yum reposyn ${repo_path}":
         command => "mkdir -p ${repo_path}",
         creates => $repo_path,
         path    => '/usr/sbin:/usr/bin:/sbin:/bin',
