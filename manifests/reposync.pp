@@ -42,7 +42,7 @@ define yum::reposync(
         require  => Package['createrepo'],
       }
 
-      exec { 'mkdir p eyp yum reposyn repo_path':
+      exec { :
         command => "mkdir -p ${repo_path}",
         creates => $repo_path,
         path    => '/usr/sbin:/usr/bin:/sbin:/bin',
@@ -54,7 +54,7 @@ define yum::reposync(
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        require => Exec['mkdir p eyp yum reposyn repo_path'],
+        require => Exec["mkdir p eyp yum reposyn ${repo_path}"],
         before  => Cron["cronjob tarball backup ${repo_id}"],
       }
     }
