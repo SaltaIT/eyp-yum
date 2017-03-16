@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.5
+
+* bugfix mkdir -p reposync
+
 ## 0.1.4
 
 * added directory **repo_path** under management (**yum::reposync**)

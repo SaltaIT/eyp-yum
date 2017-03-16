@@ -45,6 +45,7 @@ define yum::reposync(
       exec { 'mkdir p eyp yum reposyn repo_path':
         command => "mkdir -p ${repo_path}",
         creates => $repo_path,
+        path    => '/usr/sbin:/usr/bin:/sbin:/bin',
         before  => Cron["cronjob tarball backup ${tarbackup::backupscript}"],
       }
 
