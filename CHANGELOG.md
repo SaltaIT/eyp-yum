@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.8
+
+* bugfix Package['createrepo']
+
 ## 0.1.7
 
 * check if proxy is empty

@@ -41,9 +41,12 @@ define yum::reposync(
     }
     'RedHat':
     {
-      package { 'createrepo':
-        ensure  => 'installed',
-        require => Class['::yum'],
+      if(!defined(Package['createrepo']))
+      {
+        package { 'createrepo':
+          ensure  => 'installed',
+          require => Class['::yum'],
+        }
       }
 
       #reposync --gpgcheck -l --repoid=rhel-6-server-rpms --download_path=/var/www/html --downloadcomps --download-metadata
