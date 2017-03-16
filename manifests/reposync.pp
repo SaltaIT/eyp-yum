@@ -46,7 +46,7 @@ define yum::reposync(
         command => "mkdir -p ${repo_path}",
         creates => $repo_path,
         path    => '/usr/sbin:/usr/bin:/sbin:/bin',
-        before  => Cron["cronjob tarball backup ${tarbackup::backupscript}"],
+        before  => Cron["cronjob tarball backup ${repo_id}"],
       }
 
       file { $repo_path:
@@ -55,7 +55,7 @@ define yum::reposync(
         group   => 'root',
         mode    => '0755',
         require => Exec['mkdir p eyp yum reposyn repo_path'],
-        before  => Cron["cronjob tarball backup ${tarbackup::backupscript}"],
+        before  => Cron["cronjob tarball backup ${repo_id}"],
       }
     }
     default:
