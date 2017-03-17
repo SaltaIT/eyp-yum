@@ -21,10 +21,20 @@ then
 fi
 
 reposync  -l\
-          <% if @gpgcheck %>--gpgcheck<% end %> \
-          <% if @delete %>--delete<% end %>\
-          <% if @newest_only %>--newest-only<% end %>\
           --repoid=<%= @repo_id %> \
-          --download_path=<%= @repo_path%> \
-          <% if @comps %>--downloadcomps<% end %> \
-          <% if @metadata %>--download-metadata<% end %>
+          <%- if @gpgcheck -%>
+          --gpgcheck \
+          <%- end -%>
+          <%- if @delete -%>
+          --delete \
+          <%- end -%>
+          <%- if @newest_only -%>
+          --newest-only \
+          <%- end -%>
+          <%- if @comps -%>
+          --downloadcomps \
+          <%- end -%>
+          <%- if @metadata -%>
+          --download-metadata \
+          <%- end -%>
+          --download_path=<%= @repo_path%>
