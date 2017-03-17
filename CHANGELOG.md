@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.16
+
+* improved **yum::reposync** logging
+
 ## 0.1.15
 
 * **yum::reposync**: yum.pid locking
