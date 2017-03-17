@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.14
+
+* reposync script lint
+
 ## 0.1.13
 
 * added log file for reposyncs
