@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.18
+
+* added configurable max iterations waiting for **yum.pid**
+
 ## 0.1.17
 
 * added quiet option enabled by default in **yum::reposync**

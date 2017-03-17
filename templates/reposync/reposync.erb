@@ -28,7 +28,7 @@ COUNT=0
 # wait for yum.pid
 while [ -f "/var/run/yum.pid" ];
 do
-  if [ "$COUNT" -ge "100" ];
+  if [ "$COUNT" -ge "<%= @max_iterations_yum_pid %>" ];
   then
     echo "$(date "+%Y-%m-%d %H:%M:%S") too many iterations waiting for yum.pid, aborting"
     exit 1
