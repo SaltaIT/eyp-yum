@@ -12,7 +12,8 @@ define yum::reposync(
                       $cron_ensure           = 'present',
                       $cron_enabled          = true,
                       $basedir               = '/opt/reposync',
-                      $purge_before_reposync = false,
+                      $delete                = false,
+                      $newest_only           = false,
                     ) {
 
   include ::yum

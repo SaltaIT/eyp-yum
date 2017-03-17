@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exec > <%= @basedir %>/last.run.<%= @repo_id %>.log 2>&1
+
 if [ -z "<%= @repo_path %>" ];
 then
   echo "incorrect repo_path"
@@ -18,12 +20,10 @@ then
   exit 1
 fi
 
-<% if @purge_before_reposync -%>
-echo rm -fr <%= @repo_path %>
-<% end -%>
-
 reposync  -l\
-          <% if @gpgcheck %>--gpgcheck <% end %> \
+          <% if @gpgcheck %>--gpgcheck<% end %> \
+          <% if @delete %>--delete<% end %>\
+          <% if @newest_only %>--newest-only<% end %>\
           --repoid=<%= @repo_id %> \
           --download_path=<%= @repo_path%> \
           <% if @comps %>--downloadcomps<% end %> \

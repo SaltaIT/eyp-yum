@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.1.13
+
+* added log file for reposyncs
+* added rposync options:
+  * delete
+  * newest_only
+
 ## 0.1.12
 
 * added generic exec path
