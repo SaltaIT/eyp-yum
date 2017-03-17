@@ -37,6 +37,7 @@ do
   (( COUNT++ ))
 done
 
+# safety
 mkdir -p <%= @repo_path%>
 cd <%= @repo_path%>
 
@@ -58,7 +59,7 @@ reposync  -l\
           --download-metadata \
           <%- end -%>
           <%- if @quiet -%>
-          --quiet
+          --quiet \
           <%- end -%>
           --download_path=<%= @repo_path%>
 
