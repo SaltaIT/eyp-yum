@@ -14,6 +14,7 @@ define yum::reposync(
                       $basedir               = '/opt/reposync',
                       $delete                = false,
                       $newest_only           = false,
+                      $logdir                = '/opt/reposync/logs',
                     ) {
 
   include ::yum

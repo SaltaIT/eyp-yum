@@ -3,6 +3,7 @@
 ## 0.1.14
 
 * reposync script lint
+* added logdir for reposync
 
 ## 0.1.13
 
