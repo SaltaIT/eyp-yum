@@ -2,7 +2,7 @@
 
 mkdir -p <%= @logdir %>
 
-exec > <%= @logdir %>/<%= @repo_id %>.log 2>&1
+exec >> <%= @logdir %>/<%= @repo_id %>.log 2>&1
 
 if [ -z "<%= @repo_path %>" ];
 then
@@ -53,6 +53,9 @@ reposync  -l\
           <%- end -%>
           <%- if @metadata -%>
           --download-metadata \
+          <%- end -%>
+          <%- if @quiet -%>
+          --quiet
           <%- end -%>
           --download_path=<%= @repo_path%>
 

@@ -12,15 +12,34 @@ define yum::reposync(
                       $cron_ensure           = 'present',
                       $cron_enabled          = true,
                       $basedir               = '/opt/reposync',
+                      $logdir                = '/opt/reposync/logs',
                       $delete                = false,
                       $newest_only           = false,
-                      $logdir                = '/opt/reposync/logs',
+                      $quiet                 = true,
+                      $logrotation_ensure    = 'present',
+                      $logrotation_frequency = 'daily',
+                      $logrotation_rotate    = '15',
+                      $logrotation_size      = '100M',
                     ) {
 
   include ::yum
 
   Exec {
     path => '/usr/sbin:/usr/bin:/sbin:/bin',
+  }
+
+  if(defined(Class['::logrotate']))
+  {
+    #<%= @logdir %>/<%= @repo_id %>.log
+    logrotate::logs { "logs_reposync_${repo_id}":
+      ensure       => $logrotation_ensure,
+      log          => "${logdir}/${repo_id}.log",
+      compress     => true,
+      frequency    => $logrotation_frequency,
+      rotate       => $logrotation_rotate,
+      missingok    => true,
+      size         => $logrotation_size,
+    }
   }
 
   if(!defined(Exec['mkdir basedir reposync']))

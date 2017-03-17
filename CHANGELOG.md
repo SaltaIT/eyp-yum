@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.17
+
+* added quiet option enabled by default in **yum::reposync**
+* added logrotation using **eyp-logrotate**
+
 ## 0.1.16
 
 * improved **yum::reposync** logging
