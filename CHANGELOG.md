@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.15
+
+* **yum::reposync**: yum.pid locking
+
 ## 0.1.14
 
 * reposync script lint

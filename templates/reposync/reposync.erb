@@ -22,6 +22,21 @@ then
   exit 1
 fi
 
+sleep ${RANDOM:0:2}
+
+COUNT=0
+# wait for yum.pid
+while [ -f "/var/run/yum.pid" ];
+do
+  if [ "$COUNT" -ge "100" ];
+  then
+    echo "too many iterations waiting for yum.pid, aborting"
+    exit 1
+  fi
+  sleep ${RANDOM:0:2}
+  (( COUNT++ ))
+done
+
 reposync  -l\
           --repoid=<%= @repo_id %> \
           <%- if @gpgcheck -%>
