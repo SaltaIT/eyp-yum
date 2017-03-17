@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.21
+
+* added createrepo to reposync script
+
 ## 0.1.20
 
 * added PATH to reposync script
