@@ -1,5 +1,67 @@
 # CHANGELOG
 
+## 0.1.20
+
+* added PATH to reposync script
+
+## 0.1.19
+
+* improved debugging
+
+## 0.1.18
+
+* added configurable max iterations waiting for **yum.pid**
+* added mkdir repo_path and cd repo_path in script reposync
+
+## 0.1.17
+
+* added quiet option enabled by default in **yum::reposync**
+* added logrotation using **eyp-logrotate**
+
+## 0.1.16
+
+* improved **yum::reposync** logging
+
+## 0.1.15
+
+* **yum::reposync**: yum.pid locking
+
+## 0.1.14
+
+* reposync script lint
+* added logdir for reposync
+
+## 0.1.13
+
+* added log file for reposyncs
+* added rposync options:
+  * delete
+  * newest_only
+
+## 0.1.12
+
+* added generic exec path
+
+## 0.1.11
+
+* reposync with a bash script to add some sanity checks
+
+## 0.1.10
+
+* bugfix: allow multiples reposyncs using the same repo_path
+* added the following variables to **yum**:
+  * gpgcheck
+  * obsoletes
+  * plugins
+
+## 0.1.9
+
+* added exclude option for yum.conf
+
+## 0.1.8
+
+* bugfix Package['createrepo']
+
 ## 0.1.7
 
 * check if proxy is empty

@@ -8,15 +8,19 @@ keepcache=<%= scope.function_bool2number([@keepcache]) %>
 debuglevel=<%= @debuglevel %>
 logfile=/var/log/yum.log
 exactarch=1
-obsoletes=1
-gpgcheck=1
-plugins=1
+obsoletes=<%= scope.function_bool2number([@obsoletes]) %>
+gpgcheck=<%= scope.function_bool2number([@gpgcheck]) %>
+plugins=<%= scope.function_bool2number([@plugins]) %>
 installonly_limit=<%= @installonly_limit %>
 <% if defined?(@bugtracker_url) -%>
 bugtracker_url=<%= @bugtracker_url %>
 <% end -%>
 <% if defined?(@distroverpkg) -%>
 distroverpkg=<%= @distroverpkg %>
+<% end -%>
+
+<% if @exclude.any? -%>
+exclude=<%= @exclude.join(' ') %>
 <% end -%>
 
 <% if ! @http_proxy.to_s.empty? -%>

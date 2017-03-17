@@ -1,0 +1,78 @@
+#!/bin/bash
+
+PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+
+mkdir -p <%= @logdir %>
+
+exec >> <%= @logdir %>/<%= @repo_id %>.log 2>&1
+
+if [ -z "<%= @repo_path %>" ];
+then
+  echo "$(date "+%Y-%m-%d %H:%M:%S") incorrect repo_path"
+  exit 1
+fi
+
+if [ "<%= @repo_path %>" = "/" ];
+then
+  echo "$(date "+%Y-%m-%d %H:%M:%S") root not allowed as repo_path"
+  exit 1
+fi
+
+if [[ "<%= @repo_path %>" != /* ]];
+then
+  echo "$(date "+%Y-%m-%d %H:%M:%S") error, repopath is not an absolute path"
+  exit 1
+fi
+
+# Insanity: doing the same thing over and over again and expecting different results.
+sleep ${RANDOM:0:2}
+
+COUNT=0
+# wait for yum.pid
+while [ -f "/var/run/yum.pid" ];
+do
+  if [ "$COUNT" -ge "<%= @max_iterations_yum_pid %>" ];
+  then
+    echo "$(date "+%Y-%m-%d %H:%M:%S") too many iterations waiting for yum.pid, aborting"
+    exit 1
+  fi
+  sleep ${RANDOM:0:2}
+  (( COUNT++ ))
+done
+
+echo "$(date "+%Y-%m-%d %H:%M:%S") starting reposync at iteration $COUNT"
+
+# safety
+mkdir -p <%= @repo_path%>
+cd <%= @repo_path%>
+
+reposync  -l\
+          --repoid=<%= @repo_id %> \
+          <%- if @gpgcheck -%>
+          --gpgcheck \
+          <%- end -%>
+          <%- if @delete -%>
+          --delete \
+          <%- end -%>
+          <%- if @newest_only -%>
+          --newest-only \
+          <%- end -%>
+          <%- if @comps -%>
+          --downloadcomps \
+          <%- end -%>
+          <%- if @metadata -%>
+          --download-metadata \
+          <%- end -%>
+          <%- if @quiet -%>
+          --quiet \
+          <%- end -%>
+          --download_path=<%= @repo_path%>
+
+if [ $? -eq 0 ];
+then
+  echo "$(date "+%Y-%m-%d %H:%M:%S") SUCCESS"
+  exit 0
+else
+  echo "$(date "+%Y-%m-%d %H:%M:%S") FAILED"
+  exit 1
+fi

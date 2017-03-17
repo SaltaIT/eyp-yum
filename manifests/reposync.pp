@@ -1,34 +1,82 @@
 define yum::reposync(
                       $repo_path,
-                      $repo_id      = $name,
-                      $metadata     = true,
-                      $gpgcheck     = true,
-                      $comps        = true,
-                      $hour         = '2',
-                      $minute       = '0',
-                      $month        = undef,
-                      $monthday     = undef,
-                      $weekday      = undef,
-                      $cron_ensure  = 'present',
-                      $cron_enabled = true,
+                      $repo_id                = $name,
+                      $metadata               = true,
+                      $gpgcheck               = true,
+                      $comps                  = true,
+                      $hour                   = '2',
+                      $minute                 = '0',
+                      $month                  = undef,
+                      $monthday               = undef,
+                      $weekday                = undef,
+                      $cron_ensure            = 'present',
+                      $cron_enabled           = true,
+                      $basedir                = '/opt/reposync',
+                      $logdir                 = '/opt/reposync/logs',
+                      $delete                 = false,
+                      $newest_only            = false,
+                      $quiet                  = true,
+                      $logrotation_ensure     = 'present',
+                      $logrotation_frequency  = 'daily',
+                      $logrotation_rotate     = '15',
+                      $logrotation_size       = '100M',
+                      $max_iterations_yum_pid = '100',
                     ) {
 
   include ::yum
 
-  exec { "mkdir p eyp yum reposyn ${repo_path}":
-    command => "mkdir -p ${repo_path}",
-    creates => $repo_path,
-    path    => '/usr/sbin:/usr/bin:/sbin:/bin',
-    before  => Cron["cronjob tarball backup ${repo_id}"],
+  Exec {
+    path => '/usr/sbin:/usr/bin:/sbin:/bin',
   }
 
-  file { $repo_path:
-    ensure  => 'directory',
+  if(defined(Class['::logrotate']))
+  {
+    #<%= @logdir %>/<%= @repo_id %>.log
+    logrotate::logs { "logs_reposync_${repo_id}":
+      ensure       => $logrotation_ensure,
+      log          => "${logdir}/${repo_id}.log",
+      compress     => true,
+      frequency    => $logrotation_frequency,
+      rotate       => $logrotation_rotate,
+      missingok    => true,
+      size         => $logrotation_size,
+    }
+  }
+
+  if(!defined(Exec['mkdir basedir reposync']))
+  {
+    exec { 'mkdir basedir reposync':
+      command => "mkdir -p ${basedir}",
+      creates => $basedir,
+    }
+  }
+
+  file { "${basedir}/reposync_${repo_id}":
+    ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    require => Exec["mkdir p eyp yum reposyn ${repo_path}"],
-    before  => Cron["cronjob tarball backup ${repo_id}"],
+    content => template("${module_name}/reposync/reposync.erb"),
+    require => Exec['mkdir basedir reposync'],
+  }
+
+  if(!defined(Exec["mkdir p eyp yum reposyn ${repo_path}"]))
+  {
+    exec { "mkdir p eyp yum reposyn ${repo_path}":
+      command => "mkdir -p ${repo_path}",
+      creates => $repo_path,
+      before  => Cron["cronjob tarball backup ${repo_id}"],
+    }
+
+    file { $repo_path:
+      ensure  => 'directory',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      require => Exec["mkdir p eyp yum reposyn ${repo_path}"],
+      before  => Cron["cronjob tarball backup ${repo_id}"],
+    }
+
   }
 
   case $::operatingsystem
@@ -41,14 +89,17 @@ define yum::reposync(
     }
     'RedHat':
     {
-      package { 'createrepo':
-        ensure  => 'installed',
-        require => Class['::yum'],
+      if(!defined(Package['createrepo']))
+      {
+        package { 'createrepo':
+          ensure  => 'installed',
+          require => Class['::yum'],
+        }
       }
 
       #reposync --gpgcheck -l --repoid=rhel-6-server-rpms --download_path=/var/www/html --downloadcomps --download-metadata
       cron { "cronjob tarball backup ${repo_id}":
-        command  => inline_template("<% if ! @cron_enabled %>/bin/true # <% end %>reposync <% if @gpgcheck %>--gpgcheck<% end %> -l --repoid=${repo_id} --download_path=${repo_path} <% if @comps %>--downloadcomps<% end %> <% if @metadata %>--download-metadata<% end %>"),
+        command  => inline_template("<% if ! @cron_enabled %>/bin/true # <% end %>/bin/bash ${basedir}/reposync_${repo_id}"),
         user     => 'root',
         hour     => $hour,
         minute   => $minute,
