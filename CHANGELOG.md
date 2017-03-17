@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.1.10
+
+* added the following variables to **yum**:
+  * gpgcheck
+  * obsoletes
+  * plugins
+
 ## 0.1.9
 
 * added exclude option for yum.conf
