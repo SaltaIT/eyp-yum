@@ -21,6 +21,7 @@ define yum::reposync(
                       $logrotation_rotate     = '15',
                       $logrotation_size       = '100M',
                       $max_iterations_yum_pid = '100',
+                      $createrepo_verbose     = false,
                     ) {
 
   include ::yum

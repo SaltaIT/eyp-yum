@@ -72,12 +72,20 @@ if [ $? -eq 0 ];
 then
   echo "$(date "+%Y-%m-%d %H:%M:%S") reposync SUCCESS"
 
-  createrepo -v  <%= @repo_path %>/<%= @repo_id %> -g comps.xml
+  createrepo <% if @createrepo_verbose %>-v<% end %> <%= @repo_path %>/<%= @repo_id %> -g comps.xml
 
   if [ $? -eq 0 ];
   then
     echo "$(date "+%Y-%m-%d %H:%M:%S") createrepo SUCCESS"
-    exit 0
+
+    if [ -e "<%= @repo_path %>/<%= @repo_id %>/repodata/repomd.xml" ];
+    then
+      echo "$(date "+%Y-%m-%d %H:%M:%S") SUCCESS <%= @repo_path %>/<%= @repo_id %>/repodata/repomd.xml is present"
+      exit 0
+    else
+      echo "$(date "+%Y-%m-%d %H:%M:%S") ERROR <%= @repo_path %>/<%= @repo_id %>/repodata/repomd.xml is absent"
+      exit 1
+    fi
   else
     echo "$(date "+%Y-%m-%d %H:%M:%S") createrepo FAILED"
     exit 1

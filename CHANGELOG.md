@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.23
+
+* added customizable verbose for createrepo
+* repomd.xml validation
+
 ## 0.1.22
 
 * added createrepo to reposync script
