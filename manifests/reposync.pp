@@ -91,6 +91,7 @@ define yum::reposync(
     }
     'RedHat':
     {
+      # https://access.redhat.com/solutions/23016
       if(!defined(Package['createrepo']))
       {
         package { 'createrepo':
