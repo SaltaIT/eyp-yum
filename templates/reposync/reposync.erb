@@ -1,6 +1,8 @@
 #!/bin/bash
 
-exec > <%= @basedir %>/last.run.<%= @repo_id %>.log 2>&1
+mkdir -p <%= @basedir %>/logs
+
+exec > <%= @basedir %>/logs/<%= @repo_id %>.log 2>&1
 
 if [ -z "<%= @repo_path %>" ];
 then
