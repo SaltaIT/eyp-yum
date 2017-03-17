@@ -1,9 +1,12 @@
 # CHANGELOG
 
+## 0.1.11
+
+* reposync with a bash script to add some sanity checks
+
 ## 0.1.10
 
 * bugfix: allow multiples reposyncs using the same repo_path
-* reposync with a bash script to add some sanity checks
 * added the following variables to **yum**:
   * gpgcheck
   * obsoletes
