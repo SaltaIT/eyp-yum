@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z "<%= @repo_path %>" ];
+then
+  echo "incorrect repo_path"
+  exit 1
+fi
+
+if [ "<%= @repo_path %>" = "/" ];
+then
+  echo "root not allowed as repo_path"
+  exit 1
+fi
+
+if [[ "<%= @repo_path %>" != /* ]];
+then
+  echo "error, repopath is not an absolute path"
+  exit 1
+fi
+
+<% if @purge_before_reposync -%>
+echo rm -fr <%= @repo_path %>
+<% end -%>
+
+reposync  -l\
+          <% if @gpgcheck %>--gpgcheck <% end %> \
+          --repoid=<%= @repo_id %> \
+          --download_path=<%= @repo_path%> \
+          <% if @comps %>--downloadcomps<% end %> \
+          <% if @metadata %>--download-metadata<% end %>
