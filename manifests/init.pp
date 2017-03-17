@@ -5,6 +5,7 @@ class yum(
             $keepcache      = false,
             $debuglevel     = '2',
             $manage_package = true,
+            $exclude        = [],
           ) inherits yum::params {
 
   file { '/etc/yum.conf':

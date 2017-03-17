@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.9
+
+* added exclude option for yum.conf
+
 ## 0.1.8
 
 * bugfix Package['createrepo']

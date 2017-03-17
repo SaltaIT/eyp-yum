@@ -19,6 +19,10 @@ bugtracker_url=<%= @bugtracker_url %>
 distroverpkg=<%= @distroverpkg %>
 <% end -%>
 
+<% if @exclude.any? -%>
+exclude=<%= @exclude.join(' ') %>
+<% end -%>
+
 <% if ! @http_proxy.to_s.empty? -%>
 proxy=<%= @http_proxy %>
 <% end -%>
