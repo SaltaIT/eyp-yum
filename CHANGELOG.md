@@ -3,6 +3,7 @@
 ## 0.1.18
 
 * added configurable max iterations waiting for **yum.pid**
+* added mkdir repo_path and cd repo_path in script reposync
 
 ## 0.1.17
 

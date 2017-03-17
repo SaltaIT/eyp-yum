@@ -37,6 +37,9 @@ do
   (( COUNT++ ))
 done
 
+mkdir -p <%= @repo_path%>
+cd <%= @repo_path%>
+
 reposync  -l\
           --repoid=<%= @repo_id %> \
           <%- if @gpgcheck -%>
