@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.1.21
+## 0.1.22
 
 * added createrepo to reposync script
 
