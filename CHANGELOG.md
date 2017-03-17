@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.19
+
+* improved debugging
+
 ## 0.1.18
 
 * added configurable max iterations waiting for **yum.pid**
