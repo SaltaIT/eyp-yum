@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+
 mkdir -p <%= @logdir %>
 
 exec >> <%= @logdir %>/<%= @repo_id %>.log 2>&1

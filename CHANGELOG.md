@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.20
+
+* added PATH to reposync script
+
 ## 0.1.19
 
 * improved debugging
