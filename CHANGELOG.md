@@ -3,6 +3,7 @@
 ## 0.1.20
 
 * added PATH to reposync script
+* added notifempty to logrotation
 
 ## 0.1.19
 

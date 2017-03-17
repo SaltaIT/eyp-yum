@@ -39,6 +39,7 @@ define yum::reposync(
       frequency    => $logrotation_frequency,
       rotate       => $logrotation_rotate,
       missingok    => true,
+      notifempty   => true,
       size         => $logrotation_size,
     }
   }
