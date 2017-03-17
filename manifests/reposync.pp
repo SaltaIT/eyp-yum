@@ -17,6 +17,10 @@ define yum::reposync(
 
   include ::yum
 
+  Exec {
+    path => '/usr/sbin:/usr/bin:/sbin:/bin',
+  }
+
   if(!defined(Exec['mkdir basedir reposync']))
   {
     exec { 'mkdir basedir reposync':
@@ -39,7 +43,6 @@ define yum::reposync(
     exec { "mkdir p eyp yum reposyn ${repo_path}":
       command => "mkdir -p ${repo_path}",
       creates => $repo_path,
-      path    => '/usr/sbin:/usr/bin:/sbin:/bin',
       before  => Cron["cronjob tarball backup ${repo_id}"],
     }
 

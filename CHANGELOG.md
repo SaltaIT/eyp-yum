@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.12
+
+* added generic exec path
+
 ## 0.1.11
 
 * reposync with a bash script to add some sanity checks
