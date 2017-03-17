@@ -1,6 +1,6 @@
 {
   "name": "eyp-yum",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "eyp",
   "summary": "yum general config management",
   "license": "Apache-2.0",

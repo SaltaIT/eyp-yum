@@ -15,20 +15,24 @@ define yum::reposync(
 
   include ::yum
 
-  exec { "mkdir p eyp yum reposyn ${repo_path}":
-    command => "mkdir -p ${repo_path}",
-    creates => $repo_path,
-    path    => '/usr/sbin:/usr/bin:/sbin:/bin',
-    before  => Cron["cronjob tarball backup ${repo_id}"],
-  }
+  if(!defined(Exec["mkdir p eyp yum reposyn ${repo_path}"]))
+  {
+    exec { "mkdir p eyp yum reposyn ${repo_path}":
+      command => "mkdir -p ${repo_path}",
+      creates => $repo_path,
+      path    => '/usr/sbin:/usr/bin:/sbin:/bin',
+      before  => Cron["cronjob tarball backup ${repo_id}"],
+    }
 
-  file { $repo_path:
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => Exec["mkdir p eyp yum reposyn ${repo_path}"],
-    before  => Cron["cronjob tarball backup ${repo_id}"],
+    file { $repo_path:
+      ensure  => 'directory',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      require => Exec["mkdir p eyp yum reposyn ${repo_path}"],
+      before  => Cron["cronjob tarball backup ${repo_id}"],
+    }
+
   }
 
   case $::operatingsystem

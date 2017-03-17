@@ -2,6 +2,7 @@
 
 ## 0.1.10
 
+* bugfix: allow multiples reposyncs using the same repo_path
 * added the following variables to **yum**:
   * gpgcheck
   * obsoletes
