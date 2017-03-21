@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# puppet managed file
+#
+
 PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 mkdir -p <%= @logdir %>
@@ -66,13 +70,32 @@ reposync  -l\
           <%- if @quiet -%>
           --quiet \
           <%- end -%>
-          --download_path=<%= @repo_path%>
+          --download_path=<%= @repo_path %>
 
 if [ $? -eq 0 ];
 then
-  echo "$(date "+%Y-%m-%d %H:%M:%S") SUCCESS"
-  exit 0
+  echo "$(date "+%Y-%m-%d %H:%M:%S") reposync SUCCESS"
+
+  createrepo <% if @createrepo_verbose %>-v<% end %> <%= @repo_path %>/<%= @repo_id %> -g comps.xml
+
+  if [ $? -eq 0 ];
+  then
+    echo "$(date "+%Y-%m-%d %H:%M:%S") createrepo SUCCESS"
+
+    if [ -e "<%= @repo_path %>/<%= @repo_id %>/repodata/repomd.xml" ];
+    then
+      echo "$(date "+%Y-%m-%d %H:%M:%S") SUCCESS <%= @repo_path %>/<%= @repo_id %>/repodata/repomd.xml is present"
+      exit 0
+    else
+      echo "$(date "+%Y-%m-%d %H:%M:%S") ERROR <%= @repo_path %>/<%= @repo_id %>/repodata/repomd.xml is absent"
+      exit 1
+    fi
+  else
+    echo "$(date "+%Y-%m-%d %H:%M:%S") createrepo FAILED"
+    exit 1
+  fi
+
 else
-  echo "$(date "+%Y-%m-%d %H:%M:%S") FAILED"
+  echo "$(date "+%Y-%m-%d %H:%M:%S") reposync FAILED"
   exit 1
 fi

@@ -21,6 +21,7 @@ define yum::reposync(
                       $logrotation_rotate     = '15',
                       $logrotation_size       = '100M',
                       $max_iterations_yum_pid = '100',
+                      $createrepo_verbose     = false,
                     ) {
 
   include ::yum
@@ -39,6 +40,7 @@ define yum::reposync(
       frequency    => $logrotation_frequency,
       rotate       => $logrotation_rotate,
       missingok    => true,
+      notifempty   => true,
       size         => $logrotation_size,
     }
   }
@@ -89,6 +91,7 @@ define yum::reposync(
     }
     'RedHat':
     {
+      # https://access.redhat.com/solutions/23016
       if(!defined(Package['createrepo']))
       {
         package { 'createrepo':
