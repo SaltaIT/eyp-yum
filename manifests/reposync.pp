@@ -10,7 +10,6 @@ define yum::reposync(
                       $monthday               = undef,
                       $weekday                = undef,
                       $cron_ensure            = 'present',
-                      $cron_enabled           = true,
                       $basedir                = '/opt/reposync',
                       $logdir                 = '/opt/reposync/logs',
                       $delete                 = false,
@@ -102,7 +101,8 @@ define yum::reposync(
 
       #reposync --gpgcheck -l --repoid=rhel-6-server-rpms --download_path=/var/www/html --downloadcomps --download-metadata
       cron { "cronjob tarball backup ${repo_id}":
-        command  => inline_template("<% if ! @cron_enabled %>/bin/true # <% end %>/bin/bash ${basedir}/reposync_${repo_id}"),
+        ensure   => $cron_ensure,
+        command  => "/bin/bash ${basedir}/reposync_${repo_id}",
         user     => 'root',
         hour     => $hour,
         minute   => $minute,

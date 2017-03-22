@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.24
+
+* added **cron_ensure** to **yum::reposync**
+* **INCOMPATIBLE CHANGE**: dropped **cron_enable** from **yum::reposync**
+
 ## 0.1.23
 
 * added customizable verbose for createrepo
