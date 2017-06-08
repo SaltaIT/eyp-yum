@@ -99,7 +99,7 @@ define yum::reposync(
         }
       }
 
-      #reposync --gpgcheck -l --repoid=rhel-6-server-rpms --download_path=/var/www/html --downloadcomps --download-metadata
+      # reposync --gpgcheck -l --repoid=rhel-6-server-rpms --download_path=/var/www/html --downloadcomps --download-metadata
       cron { "cronjob tarball backup ${repo_id}":
         ensure   => $cron_ensure,
         command  => "/bin/bash ${basedir}/reposync_${repo_id}",
