@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.25
+
+* added patching related task:
+  - checkupdate
+
 ## 0.1.24
 
 * added **cron_ensure** to **yum::reposync**
