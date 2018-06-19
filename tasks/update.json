@@ -4,5 +4,9 @@
   "input_method": "stdin",
   "description": "Update packages",
   "parameters": {
+    "package": {
+      "description": "package to update",
+      "type": "String[1]"
+    }
   }
 }
