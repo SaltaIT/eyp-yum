@@ -2,7 +2,7 @@
   "puppet_task_version": 1,
   "supports_noop": false,
   "input_method": "stdin",
-  "description": "Update packages",
+  "description": "NOT PROD READY - NO NOT USE - Update packages",
   "parameters": {
     "package": {
       "description": "package to update",
