@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.26
+
+* added patching related tasks:
+  - listpackages
+  - update
+
 ## 0.1.25
 
 * added patching related task:
