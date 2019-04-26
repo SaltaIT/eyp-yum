@@ -2,10 +2,10 @@
   "puppet_task_version": 1,
   "supports_noop": false,
   "input_method": "stdin",
-  "description": "NOT PROD READY - NO NOT USE - Update packages",
+  "description": "Update packages",
   "parameters": {
     "package": {
-      "description": "package to update",
+      "description": "comma separated list of packages to update",
       "type": "String[1]"
     }
   }
