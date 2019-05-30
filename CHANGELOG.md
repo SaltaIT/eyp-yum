@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.27
+
+* minor cleanup
+
 ## 0.1.26
 
 * added patching related tasks:

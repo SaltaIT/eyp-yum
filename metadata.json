@@ -1,11 +1,11 @@
 {
   "name": "eyp-yum",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "author": "eyp",
   "summary": "yum general config management",
   "license": "Apache-2.0",
   "source": "https://github.com/NTTCom-MS/eyp-yum",
-  "project_page": null,
+  "project_page": "https://github.com/NTTCom-MS/eyp-yum",
   "issues_url": "https://github.com/NTTCom-MS/eyp-yum/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"},
@@ -36,7 +36,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.0.0"
+      "version_requirement": ">= 3.8.0"
     }
   ]
 }
