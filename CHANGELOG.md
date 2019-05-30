@@ -2,6 +2,7 @@
 
 ## 0.1.27
 
+* added **enforce_gpgcheck** to be able to enforce all unmanaged repos to use GPG
 * minor cleanup
 
 ## 0.1.26
