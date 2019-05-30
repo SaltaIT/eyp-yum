@@ -33,14 +33,14 @@ define yum::reposync(
   {
     #<%= @logdir %>/<%= @repo_id %>.log
     logrotate::logs { "logs_reposync_${repo_id}":
-      ensure       => $logrotation_ensure,
-      log          => "${logdir}/${repo_id}.log",
-      compress     => true,
-      frequency    => $logrotation_frequency,
-      rotate       => $logrotation_rotate,
-      missingok    => true,
-      notifempty   => true,
-      size         => $logrotation_size,
+      ensure     => $logrotation_ensure,
+      log        => "${logdir}/${repo_id}.log",
+      compress   => true,
+      frequency  => $logrotation_frequency,
+      rotate     => $logrotation_rotate,
+      missingok  => true,
+      notifempty => true,
+      size       => $logrotation_size,
     }
   }
 
