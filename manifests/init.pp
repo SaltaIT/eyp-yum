@@ -31,11 +31,11 @@ class yum(
   {
     if ($gpgcheck)
     {
-      $gpgcheck_str="1"
+      $gpgcheck_str='1'
     }
     else
     {
-      $gpgcheck_str="0"
+      $gpgcheck_str='0'
     }
 
     exec { 'enforce gpgcheck':
