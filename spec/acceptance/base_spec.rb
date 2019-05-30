@@ -3,9 +3,9 @@ require_relative './version.rb'
 
 describe 'tcpwrappers class' do
 
-  context 'basic setup' do
+  context 'epel setup' do
 
-    it 'epel-no-gpg' do
+    it 'no-gpg' do
       pp = <<-EOF
 
       class { 'epel':
@@ -23,7 +23,9 @@ describe 'tcpwrappers class' do
       it { should be_file }
       its(:content) { should match 'gpgcheck=0' }
     end
+  end
 
+  context 'yum setup' do
     # Using puppet_apply as a helper
     it 'should work with no errors' do
       pp = <<-EOF
