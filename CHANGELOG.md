@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.28
+
+* added script for refreshing rhsmd before trying to sync repos
+
 ## 0.1.27
 
 * added **enforce_gpgcheck** to be able to enforce all unmanaged repos to use GPG

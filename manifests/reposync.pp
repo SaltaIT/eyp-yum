@@ -52,6 +52,17 @@ define yum::reposync(
     }
   }
 
+  if(!defined(File['/usr/local/bin/refreshrhsm']))
+  {
+    file { '/usr/local/bin/refreshrhsm':
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0750',
+      content => file("${module_name}/refreshrhsm.sh"),
+    }
+  }
+
   file { "${basedir}/reposync_${repo_id}":
     ensure  => 'present',
     owner   => 'root',
