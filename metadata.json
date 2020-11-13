@@ -1,7 +1,7 @@
 {
   "name": "eyp-yum",
   "version": "0.1.28",
-  "author": "eyp",
+  "author": "Jordi Prats",
   "summary": "yum general config management",
   "license": "Apache-2.0",
   "source": "https://github.com/SaltaIT/eyp-yum",
